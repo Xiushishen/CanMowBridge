@@ -29,14 +29,13 @@ jobs:
 
     - name: Build ROS Package
       run: |
-    	mkdir -p catkin_ws/src
-    	# Find and copy all items except the catkin_ws directory
-    	find . -maxdepth 1 ! -name 'catkin_ws' -exec cp -R {} catkin_ws/src/ \;
-    	cd catkin_ws
-    	. /opt/ros/noetic/setup.bash
-    	catkin_make
+        mkdir -p catkin_ws/src
+        # Find and copy all items except the catkin_ws directory
+        find . -maxdepth 1 ! -name 'catkin_ws' -exec cp -R {} catkin_ws/src/ \;
+        cd catkin_ws
+        . /opt/ros/noetic/setup.bash
+        catkin_make
       shell: bash
-
 
     - name: Run Tests
       run: |
