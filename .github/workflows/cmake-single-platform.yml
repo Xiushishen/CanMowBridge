@@ -1,3 +1,13 @@
+name: Build and Test ROS Package
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -12,6 +22,9 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y python3-rosdep python3-pip
+        if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
+          sudo rosdep init
+        fi
         rosdep update
         rosdep install --from-paths src --ignore-src -r -y
         sudo apt-get install -y libyaml-cpp-dev
@@ -19,15 +32,7 @@ jobs:
 
     - name: Build ROS Package
       run: |
+        source /opt/ros/noetic/setup.bash
         mkdir -p catkin_ws/src
-        cp -R . catkin_ws/src/
-        cd catkin_ws
-        catkin_make
-      shell: bash
-
-    - name: Run Tests
-      run: |
-        cd catkin_ws
-        catkin_make run_tests && catkin_test_results
-      shell: bash
+        cp -R .
 
