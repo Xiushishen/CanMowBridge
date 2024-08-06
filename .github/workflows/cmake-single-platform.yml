@@ -2,7 +2,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: ros:noetic-robot
+      image: osrf/ros:noetic-desktop-full
 
     steps:
     - name: Checkout Code
