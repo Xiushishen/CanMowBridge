@@ -6,7 +6,10 @@ RUN apt-get update && apt-get install -y \
     libyaml-cpp-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN rosdep init \
+# Only run rosdep init if it hasn't been initialized
+RUN if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then \
+        rosdep init; \
+    fi \
     && rosdep update
 
 WORKDIR /catkin_ws
