@@ -1,0 +1,20 @@
+<launch>
+    <node name="can_receive_node" pkg="can_ros1_driver" type="can_receive_node" output="screen">
+        <!-- wheel base -->
+        <param name="wheel_base" value="1.04"/>
+        <!-- wheel diameter -->
+        <param name="wheel_diameter" value="0.6096"/>
+        <!-- publish tf -->
+        <param name="publish_tf" value="true"/>
+    </node>
+    <node name="can_send_node" pkg="can_ros1_driver" type="can_send_node" output="screen">
+        <!-- wheel base -->
+        <param name="wheel_base" value="1.04"/>
+        <!-- velocity topic -->
+        <param name="twist_topic" value="/cmd_vel"/>
+        <!-- wheel diameter -->
+        <param name="wheel_diameter" value="0.6096"/>
+    </node>
+    <!-- rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find can_ros1_driver)/rviz/can.rviz" required="true"/>
+</launch>

@@ -1,0 +1,5 @@
+YAML: 1.0
+wheel_base: 1.04
+wheel_diameter: 0.6096
+publish_tf: false
+rpm_motor_to_wheel: 21.1
