@@ -12,11 +12,11 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     container:
-      image: ros:noetic-robot  # 使用ROS Noetic的官方Docker容器
+      image: ros:noetic-robot  # Using ROS Noetic official Docker container
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3  # Updated to the latest version
 
     - name: Setup ROS Environment
       run: |
