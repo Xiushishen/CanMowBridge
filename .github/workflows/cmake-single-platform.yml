@@ -22,7 +22,6 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y python3-rosdep python3-pip
-        sudo rosdep init
         rosdep update
         rosdep install --from-paths src --ignore-src -r -y
         sudo apt-get install -y libyaml-cpp-dev
