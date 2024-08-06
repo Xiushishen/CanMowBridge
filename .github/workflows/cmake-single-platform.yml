@@ -16,22 +16,15 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3  # Updated to the latest version
+      uses: actions/checkout@v3  # Currently the latest stable version
 
-    - name: Setup ROS Environment
+    - name: Setup ROS Environment and Install Dependencies
       run: |
-        echo "source /opt/ros/noetic/setup.bash" >> $GITHUB_ENV
         sudo apt update
         sudo apt install -y python3-rosdep python3-pip
         sudo rosdep init
         rosdep update
-
-    - name: Install Dependencies
-      run: |
         rosdep install --from-paths src --ignore-src -r -y
-
-    - name: Install yaml-cpp
-      run: |
         sudo apt-get install -y libyaml-cpp-dev
 
     - name: Build ROS Package
@@ -44,6 +37,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        source catkin_ws/devel/setup.bash
+        source /opt/ros/noetic/setup.bash
+        cd catkin_ws
         catkin_make run_tests && catkin_test_results
 
